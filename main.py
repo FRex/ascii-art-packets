@@ -3,13 +3,18 @@ import sys
 
 BIT_SIZE = 3
 
+def field_width(bits):
+    return BIT_SIZE * bits + (bits - 1)
+
 def adjust(s, bits):
     #print(f"adjusting {s} to {bits}", file=sys.stderr)
-    ret = str(s).center(BIT_SIZE * bits + (bits - 1))
+    ret = str(s).center(field_width(bits))
     #print(f"got >{ret}< of len {len(ret)}", file=sys.stderr)
     return ret
 
 BITS_PER_LINE = 32
+PARTS_PER_LINE = 4
+BITS_PER_PART = BITS_PER_LINE // PARTS_PER_LINE
 
 class Diagram:
     def __init__(self) -> None:
@@ -21,7 +26,7 @@ class Diagram:
     def print(self):
         bits = 0
         ret = []
-        HEADER = '+' + '|'.join(['-' * BIT_SIZE] * BITS_PER_LINE) + '+'
+        HEADER = '+' + '|'.join(['-' * field_width(BITS_PER_PART)] * PARTS_PER_LINE) + '+'
         ret.append(HEADER)
         for n, w in self.elements:
 
