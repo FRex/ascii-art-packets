@@ -1,7 +1,7 @@
 import sys
 
 
-BIT_SIZE = 3
+BIT_SIZE = 2
 
 def field_width(bits):
     return BIT_SIZE * bits + (bits - 1)
@@ -70,21 +70,11 @@ d.add('Oct 2', 8)
 d.add('Oct 3', 8)
 d.add(None, None)
 
-d.add('Version', 4)
-d.add('IHL', 4)
-d.add('DSCP', 6)
-d.add('ECN', 2)
-d.add('Total Length', 16)
-
-d.add('Identification', 16)
-d.add('Flags', 3)
-d.add('Fragment Offset', 13)
-
-d.add('Time To Live', 8)
-d.add('Protocol', 8)
-d.add('Header Checksum', 16)
-d.add('Source IP Address', 32)
-d.add('Destination IP Address', 32)
+with open(sys.argv[1], 'r') as f:
+    for line in (line for line in map(str.strip, f) if line):
+        parts = line.split(maxsplit=1)
+        w, name = int(parts[0]), parts[1]
+        d.add(name, w)
 
 print(d.print())
 

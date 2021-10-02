@@ -1,0 +1,15 @@
+4 Version
+4 IHL
+6 DSCP
+2 ECN
+16 Total Length
+
+16 Identification
+3 Flags
+13 Fragment Offset
+
+8 Time To Live
+8 Protocol
+16 Header Checksum
+32 Source IP Address
+32 Destination IP Address
